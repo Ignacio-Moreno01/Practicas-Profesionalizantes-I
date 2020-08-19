@@ -1,0 +1,23 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main(){
+    struct Cancion
+{
+    string artista;
+    string titulo;
+    int duracion;
+    int tamanio_fichero;
+};
+    struct Cancion cancion;
+    cout<<"Ingrese el nombre del artista: ";
+    cin>>cancion.artista;
+    cout<<"Ingrese el nombre de la cancion: ";
+    cin>>cancion.titulo;
+    cout<<"Ingrese la duracion en segundos: ";
+    cin>>cancion.duracion;
+    cout<<"Ingrese el tamanio en kb: ";
+    cin>>cancion.tamanio_fichero;
+    return 0;
+}
