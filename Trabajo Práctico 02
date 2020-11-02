@@ -59,7 +59,7 @@ int main()
         cin >> option;
         cin.ignore();
 
-        // Hacemos una cosa u otra según la opción escogida
+        // Hacemos una cosa u otra según la opción escogida.
         switch(option)
         {
             case 1: // Añadir un dato nuevo
@@ -81,7 +81,7 @@ int main()
 
                 numberOfFiles++;  // Y tenemos una ficha más
             }
-            else   // Si no hay hueco para más archivos, avisamos
+            else   // Si no hay hueco para más archivos, avisamos.
             {
                 cout << "¡Maximo de archivos alcanzado (1000)!" << endl;
             }
@@ -94,7 +94,7 @@ int main()
             }
 
             break;
-            case 3: // Mostrar según el tamaño
+            case 3: // Mostrar según el tamaño.
 
             cout << "A partir de que tamanio quieres que te muestre? ";
             cin >> tempNumber;
@@ -106,7 +106,7 @@ int main()
                 }
             }
             break;
-            case 4: // Ver todos los datos (pocos) de un archivo
+            case 4: // Ver todos los datos (pocos) de un archivo.
 
             cout << "De que archivo quieres ver todos los datos?";
             cin >> tempText;
@@ -118,7 +118,7 @@ int main()
                 }
             }
             break;
-            case 5: // Salir: avisamos de que salimos
+            case 5: // Salir: avisamos de que salimos del programa.
 
             cout << "Fin del programa" << endl;
 
@@ -129,7 +129,7 @@ int main()
 
             break;
         }
-    } while(option != 5);// Si la opción es 5, terminamos
+    } while(option != 5);// Si la opción es 5, terminamos el programa.
 
     return 0;
 }
