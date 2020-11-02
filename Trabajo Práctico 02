@@ -2,7 +2,7 @@
 y, si no existiese el archivo, para que lo cree el programa.*/
 
 #include <iostream>
-#include <string>o
+#include <string>
 #include <fstream>
 using namespace std;
 
