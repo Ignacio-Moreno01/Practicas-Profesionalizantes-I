@@ -1,12 +1,15 @@
 /* Para la persistencia de archivos modifiqué el código para que ejecute las opciones que el usuario desee en el menú 
 y, si no existiese el archivo, para que lo cree el programa.*/
 
+/* Para la persistencia de archivos modifiqué el código para que ejecute las opciones que el usuario desee en el menú 
+y, si no existiese el archivo, para que lo cree el programa.*/
+
 #include <iostream>
 #include <string>
 #include <fstream>
 using namespace std;
 
-struct FileData 
+struct FileData
 {
     string name;// Nombre del archivo
     int size;// El tamaño en bytes
@@ -27,17 +30,17 @@ int main()
     {
         numberOfFiles = 0; //inicializamos siempre nuestra numberofiles en 0 para actualizar los datos
 
-        ifstream file; //cargamos los datos del archivo...
-        file.open("FileData.txt", ios::in);
-        if(file.is_open())
+        ifstream FileData; //cargamos los datos del archivo...
+        FileData.open("FileData.txt", ios::in);
+        if(FileData.is_open())
         {
-            while(!file.eof())
+            while(!FileData.eof())
             {
-                file >> files[numberOfFiles].size;
+                FileData >> files[numberOfFiles].size;
 
-                file.get();
+                FileData.get();
 
-                getline(file, files[numberOfFiles].name);
+                getline(FileData, files[numberOfFiles].name);
 
                 if((!files[numberOfFiles].name.empty())&&(files[numberOfFiles].size != 0)) //si el renglon no esta vacio...
                 {
@@ -45,7 +48,7 @@ int main()
                 }
             }
         }
-        file.close();
+        FileData.close();
 
         // Menu principal
         cout << endl;
