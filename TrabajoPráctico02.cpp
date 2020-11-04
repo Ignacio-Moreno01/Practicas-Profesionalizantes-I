@@ -1,9 +1,6 @@
 /* Para la persistencia de archivos modifiqué el código para que ejecute las opciones que el usuario desee en el menú 
 y, si no existiese el archivo, para que lo cree el programa.*/
 
-/* Para la persistencia de archivos modifiqué el código para que ejecute las opciones que el usuario desee en el menú 
-y, si no existiese el archivo, para que lo cree el programa.*/
-
 #include <iostream>
 #include <string>
 #include <fstream>
@@ -11,16 +8,16 @@ using namespace std;
 
 struct FileData
 {
-    string name;// Nombre del archivo
-    int size;// El tamaño en bytes
+    string name;// Nombre del archivo.
+    int size;// El tamaño en bytes.
 };
 FileData files[1000];
 
-int numberOfFiles;// Número de archivos que ya tenemos
-int i;// Para bucles
-int option;// La option del menu que elija el usuario
+int numberOfFiles;// Número de archivos que ya tenemos.
+int i;// Para bucles.
+int option;// La option del menu que elija el usuario.
 
-string tempText;// Para pedir datos al usuario
+string tempText;// Para pedir datos al usuario.
 int tempNumber;
 
 int main()
@@ -28,13 +25,13 @@ int main()
 
     do
     {
-        numberOfFiles = 0; //inicializamos siempre nuestra numberofiles en 0 para actualizar los datos
+        numberOfFiles = 0; // Inicializamos la variable numberofiles en 0 para actualizar los datos.
 
-        ifstream FileData; //cargamos los datos del archivo...
+        ifstream FileData; // Cargamos los datos del archivo.
         FileData.open("FileData.txt", ios::in);
-        if(FileData.is_open())
+        if(FileData.is_open()) // Abrimos el archivo.
         {
-            while(!FileData.eof())
+            while(!FileData.eof()) // Recorremos el archivo.
             {
                 FileData >> files[numberOfFiles].size;
 
@@ -42,15 +39,15 @@ int main()
 
                 getline(FileData, files[numberOfFiles].name);
 
-                if((!files[numberOfFiles].name.empty())&&(files[numberOfFiles].size != 0)) //si el renglon no esta vacio...
+                if((!files[numberOfFiles].name.empty())&&(files[numberOfFiles].size != 0)) // si el renglon no esta vacio.
                 {
                     numberOfFiles++;
                 }
             }
         }
-        FileData.close();
+        FileData.close(); // Cerramos el archivo.
 
-        // Menu principal
+        // Menu principal.
         cout << endl;
         cout << "Escoja una opcion:" << endl;
         cout << "1.- Aniadir datos de un nuevo archivo" << endl;
@@ -67,14 +64,14 @@ int main()
         {
             case 1: // Añadir un dato nuevo
 
-            if (numberOfFiles < 1000)   // Si queda hueco
+            if (numberOfFiles < 1000)   // Si queda hueco.
             {
                 cout << "Introduce el nombre del archivo: ";
                 getline(cin, files[numberOfFiles].name);
                 cout << "Introduce el tamanio en KB: ";
                 cin >> files[numberOfFiles].size;
 
-                ofstream oup_file; //guardamos los nuevos datos en el archivo y creamos uno si el archivo no existe...
+                ofstream oup_file; //guardamos los nuevos datos en el archivo y creamos uno si el archivo no existe
                 oup_file.open("FileData.txt", ios::app);
                 if(oup_file.is_open())
                 {
@@ -82,14 +79,14 @@ int main()
                 }
                 oup_file.close();
 
-                numberOfFiles++;  // Y tenemos una ficha más
+                numberOfFiles++;  // Y tenemos una ficha más.
             }
             else   // Si no hay hueco para más archivos, avisamos.
             {
                 cout << "¡Maximo de archivos alcanzado (1000)!" << endl;
             }
             break;
-            case 2: // Mostrar todos
+            case 2: // Mostrar todos.
 
             for (i = 0; i < numberOfFiles; i++)
             {
@@ -126,7 +123,7 @@ int main()
             cout << "Fin del programa" << endl;
 
             break;
-            default: // Otra opción: no válida
+            default: // Otra opción: no válida.
 
             cout << "¡Opcion desconocida!" << endl;
 
