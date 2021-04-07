@@ -1,0 +1,137 @@
+/* El patron de diseño "Composite" fue creado con el propósito de dar una solución mas simple y elegante a un 
+problema de POO mediante la composicion recursiva y en forma de árbol utilizando los diagramas de clases 
+(diagramas UML), para luego ser escrito en código.
+El diagrama va a estar contenido por una Clase base (clase abstracta), hojas (clases sin hijos) y nodos (clases 
+con hijos); un nodo tambien se define como una "clase compuesta", es decir, que se crean dos ramas o "sub clases" 
+a partir de ésta.
+Composite se caracteriza por ser un nodo que tiene una relación directa con la clase base y comparte todos  sus
+atributos y métodos. 
+
+En este ejemplo, se utiliza un sistema de archivos donde Composite es la "clase Folder" y el algoritmo de 
+recusión se implementa cuando las instrucciones del caso base se heredan en la demas clases hijas y éstas se 
+reiteran para que vuelva a llamarse en la función en la que esté, teniendo una función similar a un bucle. */
+
+
+/**
+    Project     : Composite Pattern Example
+
+    Authors     : Erich Gamma, Richard Helm, Ralph Johnson and John Vlissides
+**/
+///////////////////////////////////////////ICOMPONENT-INTERFACE///////////////////////////////////////////////
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+class IFileSystemComponent // Clase base
+{
+    public: // Solo tendra Metodos
+        virtual ~IFileSystemComponent(){};
+        virtual void list(int depth) = 0; //operation
+        virtual void add(IFileSystemComponent* component) = 0;
+        virtual void remove(IFileSystemComponent* component) = 0;
+};
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+/////////////////////////////////////////////COMPOSITE///////////////////////////////////////////////////////
+class Folder : public IFileSystemComponent // Clase Compuesta (Composite)
+{
+    private: // Atributos 
+        std::string m_nodeName;
+        std::vector<IFileSystemComponent*> m_children;
+
+    public: // Metodos heredados de la clase base
+        Folder(std::string nodeName)
+        {
+            m_nodeName = nodeName;
+        }
+
+        virtual ~Folder(){}
+        	
+        void list(int depth)// Operacion Listar
+        {
+            std::string newStr(depth, '-');
+            std::cout << newStr << m_nodeName << " depth: " << depth << std::endl;
+            for(IFileSystemComponent* currentChild : m_children)
+            {
+                if(currentChild != 0)
+                {
+                    currentChild->list(depth + 1);
+                }
+            }
+        }
+
+        void add(IFileSystemComponent* component) // Operacion Agregar
+        {
+            m_children.push_back(component);
+        }
+
+        void remove(IFileSystemComponent* component) // Operacion Remover
+        {
+            m_children.erase(std::remove(m_children.begin(), m_children.end(), component), m_children.end());
+        }
+};
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////LEAF////////////////////////////////////////////////////////
+class File : public IFileSystemComponent // Clase Hoja
+{
+    private: // Atributos
+        std::string m_nodeName;
+        std::vector<IFileSystemComponent*> m_children;
+
+    public: // Metodos heredados de la clase base
+        File(std::string nodeName)
+        {
+            m_nodeName = nodeName;
+        }
+
+        virtual ~File(){}
+
+        void list(int depth)// Operacion Listar
+        {
+            std::string newStr(depth, '-');
+            std::cout << newStr << m_nodeName << " depth: " << depth << std::endl;
+            for(IFileSystemComponent* currentChild : m_children)
+            {
+                if(currentChild != 0)
+                {
+                    currentChild->list(depth + 1);
+                }
+            }
+        }
+
+        void add(IFileSystemComponent* component) // Operacion Agregar
+        {
+            m_children.push_back(component);
+        }
+
+        void remove(IFileSystemComponent* component) // Operacion Remover
+        {
+            m_children.erase(std::remove(m_children.begin(), m_children.end(), component), m_children.end());
+        }
+};
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+/////////////////////////////////////////////////MAIN////////////////////////////////////////////////////////
+int main()
+{
+    IFileSystemComponent* folder_01 = new Folder("folder_01");
+
+    IFileSystemComponent* folder_02 = new Folder("folder_02");
+    folder_01->add(folder_02);
+
+    IFileSystemComponent* folder_03 = new Folder("folder_03");
+    IFileSystemComponent* fileA = new File("file A");
+    folder_03->add(fileA);
+    folder_03->add(new File("file B"));
+    folder_02->add(folder_03);
+
+    
+    folder_01->list(1);
+
+    delete folder_03;
+    delete folder_02;
+    delete folder_01;
+    return 0;
+}
+/////////////////////////////////////////////////////////////////////
