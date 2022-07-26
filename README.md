@@ -1,1 +1,1 @@
-# Practicas-Ignacio-Moreno-
+# Repositorio de la materia Practicas Profesionalizantes I
